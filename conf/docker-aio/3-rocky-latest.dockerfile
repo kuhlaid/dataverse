@@ -4,19 +4,19 @@ RUN yum install -y java-11-openjdk-devel postgresql-server sudo epel-release unz
 RUN yum install -y jq lsof awscli
 
 # copy and unpack dependencies (solr, payara)
-COPY dv /tmp/dv
-COPY testdata/schema*.xml /tmp/dv/
-COPY testdata/solrconfig.xml /tmp/dv
+COPY sudo dv /tmp/dv
+COPY sudo testdata/schema*.xml /tmp/dv/
+COPY sudo testdata/solrconfig.xml /tmp/dv
 
 # ITs need files
-COPY testdata/sushi_sample_logs.json /tmp/
+COPY sudo testdata/sushi_sample_logs.json /tmp/
 
 # IPv6 and localhost appears to be related to some of the intermittant connection issues
 COPY disableipv6.conf /etc/sysctl.d/
 RUN rm /etc/httpd/conf/*
 COPY httpd.conf /etc/httpd/conf 
-RUN cd /opt ; tar zxf /tmp/dv/deps/solr-8.11.1dv.tgz 
-RUN cd /opt ; unzip /tmp/dv/deps/payara-5.2020.6.zip ; ln -s /opt/payara5 /opt/glassfish4
+RUN sudo cd /opt ; tar zxf /tmp/dv/deps/solr-8.11.1dv.tgz 
+RUN sudo cd /opt ; unzip /tmp/dv/deps/payara-5.2020.6.zip ; ln -s /opt/payara5 /opt/glassfish4
 
 # this copy of domain.xml is the result of running `asadmin set server.monitoring-service.module-monitoring-levels.jvm=LOW` on a default glassfish installation (aka - enable the glassfish REST monitir endpoint for the jvm`
 # this dies under Java 11, do we keep it?
@@ -25,10 +25,10 @@ RUN cd /opt ; unzip /tmp/dv/deps/payara-5.2020.6.zip ; ln -s /opt/payara5 /opt/g
 RUN sudo -u postgres /usr/bin/initdb /var/lib/pgsql/data
 
 # copy configuration related files
-RUN cp /tmp/dv/pg_hba.conf /var/lib/pgsql/data/
-RUN cp -r /opt/solr-8.11.1/server/solr/configsets/_default /opt/solr-8.11.1/server/solr/collection1
-RUN cp /tmp/dv/schema*.xml /opt/solr-8.11.1/server/solr/collection1/conf/
-RUN cp /tmp/dv/solrconfig.xml /opt/solr-8.11.1/server/solr/collection1/conf/solrconfig.xml
+RUN sudo cp /tmp/dv/pg_hba.conf /var/lib/pgsql/data/
+RUN sudo cp -r /opt/solr-8.11.1/server/solr/configsets/_default /opt/solr-8.11.1/server/solr/collection1
+RUN sudo cp /tmp/dv/schema*.xml /opt/solr-8.11.1/server/solr/collection1/conf/
+RUN sudo cp /tmp/dv/solrconfig.xml /opt/solr-8.11.1/server/solr/collection1/conf/solrconfig.xml
 
 # skipping payara user and solr user (run both as root)
 
@@ -52,12 +52,12 @@ RUN mkdir /opt/dv
 
 # keeping the symlink on the off chance that something else is still assuming /usr/local/glassfish4
 RUN ln -s /opt/payara5 /usr/local/glassfish4
-COPY dv/install/ /opt/dv/
-COPY install.bash /opt/dv/
-COPY entrypoint.bash /opt/dv/
-COPY testdata/* /opt/dv/testdata
-COPY testscripts/* /opt/dv/testdata/
-COPY setupIT.bash /opt/dv
+COPY sudo dv/install/ /opt/dv/
+COPY sudo install.bash /opt/dv/
+COPY sudo entrypoint.bash /opt/dv/
+COPY sudo testdata/* /opt/dv/testdata
+COPY sudo testscripts/* /opt/dv/testdata/
+COPY sudo setupIT.bash /opt/dv
 WORKDIR /opt/dv
 
 # need to take DOI provider info from build args as of ec377d2a4e27424db8815c55ce544deee48fc5e0
