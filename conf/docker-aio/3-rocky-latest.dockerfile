@@ -12,17 +12,17 @@ RUN yum install -y jq lsof awscli
 # RUN sudo cp testdata/sushi_sample_logs.json /tmp/
 
 # IPv6 and localhost appears to be related to some of the intermittant connection issues
-# RUN sudo cp  disableipv6.conf /etc/sysctl.d/
+COPY  disableipv6.conf /etc/sysctl.d/
 RUN rm /etc/httpd/conf/*
-# RUN sudo cp httpd.conf /etc/httpd/conf 
-# RUN sudo cd /opt ; tar zxf /tmp/dv/deps/solr-8.11.1dv.tgz 
-# RUN sudo cd /opt ; unzip /tmp/dv/deps/payara-5.2020.6.zip ; ln -s /opt/payara5 /opt/glassfish4
+COPY httpd.conf /etc/httpd/conf 
+RUN cd /opt ; tar zxf /tmp/dv/deps/solr-8.11.1dv.tgz 
+RUN cd /opt ; unzip /tmp/dv/deps/payara-5.2020.6.zip ; ln -s /opt/payara5 /opt/glassfish4
 
 # this copy of domain.xml is the result of running `asadmin set server.monitoring-service.module-monitoring-levels.jvm=LOW` on a default glassfish installation (aka - enable the glassfish REST monitir endpoint for the jvm`
 # this dies under Java 11, do we keep it?
 #COPY domain-restmonitor.xml /opt/payara5/glassfish/domains/domain1/config/domain.xml
 
-# RUN sudo -u postgres /usr/bin/initdb /var/lib/pgsql/data
+RUN sudo -u postgres /usr/bin/initdb /var/lib/pgsql/data
 
 # copy configuration related files
 # RUN sudo cp /tmp/dv/pg_hba.conf /var/lib/pgsql/data/
