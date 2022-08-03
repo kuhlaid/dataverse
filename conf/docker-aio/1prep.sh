@@ -78,13 +78,14 @@ sudo cp -r /opt/solr-8.11.1/server/solr/configsets/_default /opt/solr-8.11.1/ser
 sudo cp /tmp/dv/schema.xml /opt/solr-8.11.1/server/solr/collection1/conf/
 sudo cp /tmp/dv/solrconfig.xml /opt/solr-8.11.1/server/solr/collection1/conf/solrconfig.xml
 
+
 # keeping the symlink on the off chance that something else is still assuming /usr/local/glassfish4
 # sudo ln -s /opt/payara5 /usr/local/glassfish4
-sudo cp dv/install/ /opt/dv/
+sudo cp -r dv/install/ /opt/dv/
 sudo cp install.bash /opt/dv/
 sudo cp entrypoint.bash /opt/dv/
-sudo cp testdata/* /opt/dv/testdata
-sudo cp testscripts/* /opt/dv/testdata/
+sudo cp -r testdata/ /opt/dv/testdata
+sudo cp -r testscripts/ /opt/dv/testdata
 sudo cp setupIT.bash /opt/dv
 
 sudo cp configure_doi.bash /opt/dv
