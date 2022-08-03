@@ -8,17 +8,18 @@
 # sudo apt-get -y install make         # install `make` since it is not automatically included in the OS
 # sudo apt-get -y install maven        # install `maven` since it is not automatically included in the OS
 
-echo '------------------ start copy test data'                # testing
+echo '------------------ start copy test data (/com.docker.devenvironments.code/conf/docker-aio/testdata)'                # testing
+echo $(pwd)
 mkdir -p testdata/doc/sphinx-guides/source/_static/util/
-chmod 0755 testdata/
 cd ../
 echo $(pwd)
-cp $(pwd)/solr/8.11.1/schema.xml testdata/
-cp $(pwd)/solr/8.11.1/solrconfig.xml testdata/
-cp $(pwd)/jhove/jhove.conf testdata/
-cp $(pwd)/jhove/jhoveConfig.xsd testdata/
-cd ../
+cp $(pwd)/solr/8.11.1/schema.xml docker-aio/testdata/
+cp $(pwd)/solr/8.11.1/solrconfig.xml docker-aio/testdata/
+cp $(pwd)/jhove/jhove.conf docker-aio/testdata/
+cp $(pwd)/jhove/jhoveConfig.xsd docker-aio/testdata/
+echo '------ end basic copy --------------'
 cp -r scripts $(pwd)/docker-aio/testdata/
+cd ../
 cp doc/sphinx-guides/source/_static/util/createsequence.sql conf/docker-aio/testdata/doc/sphinx-guides/source/_static/util/
 echo '------------------ end copy test data'                # testing
 
