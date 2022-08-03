@@ -57,8 +57,7 @@ RUN ln -s /opt/payara5 /usr/local/glassfish4
 COPY dv/install/ /opt/dv/
 COPY install.bash /opt/dv/
 COPY entrypoint.bash /opt/dv/
-COPY testdata /opt/dv/testdata
-COPY testdata/updateSchemaMDB.sh /opt/dv/testdata/
+COPY testdata/* /opt/dv/testdata
 COPY testscripts/* /opt/dv/testdata/
 COPY setupIT.bash /opt/dv
 WORKDIR /opt/dv
