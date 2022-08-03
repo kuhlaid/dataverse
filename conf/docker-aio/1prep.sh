@@ -18,8 +18,9 @@ cp $(pwd)/solr/8.11.1/solrconfig.xml docker-aio/testdata/
 cp $(pwd)/jhove/jhove.conf docker-aio/testdata/
 cp $(pwd)/jhove/jhoveConfig.xsd docker-aio/testdata/
 echo '------ end basic copy --------------'
-cp -r scripts $(pwd)/docker-aio/testdata/
 cd ../
+echo $(pwd)
+cp -r $(pwd)/scripts $(pwd)/conf/docker-aio/testdata/
 cp doc/sphinx-guides/source/_static/util/createsequence.sql conf/docker-aio/testdata/doc/sphinx-guides/source/_static/util/
 echo '------------------ end copy test data'                # testing
 
