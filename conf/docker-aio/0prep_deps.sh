@@ -1,8 +1,16 @@
 #!/bin/sh
-# download necessary dependencies
+# download necessary dependencies and setup necessary directories
 
 if [ ! -d dv/deps ]; then
 	mkdir -p dv/deps
+fi
+
+# need these for the Dockerfile
+if [ ! -d /opt/dv ]; then
+	mkdir -p /opt/dv
+fi
+if [ ! -d /tmp/dv ]; then
+	mkdir -p /tmp/dv
 fi
 
 if [ ! -e dv/deps/payara-5.2021.6.zip ]; then
