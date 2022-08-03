@@ -2,27 +2,26 @@
 
 # move things necessary for integration tests into build context.
 # this was based off the phoenix deployment; and is likely uglier and bulkier than necessary in a perfect world
-     
-# commented out for testing
-# sudo apt-get update                  # update the packages so `make` can be included
-# sudo apt-get -y install make         # install `make` since it is not automatically included in the OS
-# sudo apt-get -y install maven        # install `maven` since it is not automatically included in the OS
 
-echo '------------------ start copy test data (/com.docker.devenvironments.code/conf/docker-aio/testdata)'                # testing
-echo $(pwd)
+sudo apt-get update                  # update the packages so `make` can be included
+sudo apt-get -y install make         # install `make` since it is not automatically included in the OS
+sudo apt-get -y install maven        # install `maven` since it is not automatically included in the OS
+
+# echo '------------------ start copy test data (/com.docker.devenvironments.code/conf/docker-aio/testdata)'                # testing
+# echo $(pwd)
 mkdir -p testdata/doc/sphinx-guides/source/_static/util/
 cd ../
-echo $(pwd)
+# echo $(pwd)
 cp $(pwd)/solr/8.11.1/schema.xml docker-aio/testdata/
 cp $(pwd)/solr/8.11.1/solrconfig.xml docker-aio/testdata/
 cp $(pwd)/jhove/jhove.conf docker-aio/testdata/
 cp $(pwd)/jhove/jhoveConfig.xsd docker-aio/testdata/
-echo '------ end basic copy --------------'
+# echo '------ end basic copy --------------'
 cd ../
-echo $(pwd)
+# echo $(pwd)
 cp -r $(pwd)/scripts $(pwd)/conf/docker-aio/testdata/
 cp doc/sphinx-guides/source/_static/util/createsequence.sql conf/docker-aio/testdata/doc/sphinx-guides/source/_static/util/
-echo '------------------ end copy test data'                # testing
+# echo '------------------ end copy test data'                # testing
 
 # wget -q https://downloads.apache.org/maven/maven-3/3.6.3/binaries/apache-maven-3.6.3-bin.tar.gz
 # tar xfz apache-maven-3.6.3-bin.tar.gz
