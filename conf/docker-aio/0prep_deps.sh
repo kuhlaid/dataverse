@@ -7,7 +7,7 @@ fi
 
 # need these for the Dockerfile
 if [ ! -d /opt/dv ]; then
-	mkdir -p /opt/dv
+	sudo mkdir -p /opt/dv
 fi
 if [ ! -d /tmp/dv ]; then
 	mkdir -p /tmp/dv
