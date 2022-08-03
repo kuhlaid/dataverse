@@ -56,7 +56,7 @@ echo "----------------> trying to move copy commands from Docker"
 
 # moving copy commands from the Docker file since the copy commands are not succeeding in the Docker file
 # copy and unpack dependencies (solr, payara)
-sudo cp dv /tmp/dv
+sudo cp -r dv /tmp/dv
 sudo cp testdata/schema*.xml /tmp/dv/
 sudo cp testdata/solrconfig.xml /tmp/dv
 
@@ -64,11 +64,11 @@ sudo cp testdata/solrconfig.xml /tmp/dv
 sudo cp testdata/sushi_sample_logs.json /tmp/
 
 # IPv6 and localhost appears to be related to some of the intermittant connection issues
-sudo cp disableipv6.conf /etc/sysctl.d/
-sudo cp httpd.conf /etc/httpd/conf 
-sudo cd opt ; tar zxf /tmp/dv/deps/solr-8.11.1dv.tgz 
+# sudo cp disableipv6.conf /etc/sysctl.d/
+# sudo cp httpd.conf /etc/httpd/conf 
+# cd /opt ; tar zxf /tmp/dv/deps/solr-8.11.1dv.tgz 
 
-sudo -u postgres /usr/bin/initdb /var/lib/pgsql/data
+# sudo -u postgres /usr/bin/initdb /var/lib/pgsql/data
 
 # copy configuration related files
 sudo cp /tmp/dv/pg_hba.conf /var/lib/pgsql/data/
