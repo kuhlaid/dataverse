@@ -66,8 +66,9 @@ sudo cp testdata/sushi_sample_logs.json /tmp/
 # IPv6 and localhost appears to be related to some of the intermittant connection issues
 # sudo cp disableipv6.conf /etc/sysctl.d/
 # sudo cp httpd.conf /etc/httpd/conf 
-sudo cd /opt ; tar zxf /tmp/dv/deps/solr-8.11.1dv.tgz 
-sudo cd /opt ; unzip /tmp/dv/deps/payara-5.2020.6.zip ; ln -s /opt/payara5 /opt/glassfish4
+cd /opt ; tar zxf /tmp/dv/deps/solr-8.11.1dv.tgz 
+cd /opt ; unzip /tmp/dv/deps/payara-5.2020.6.zip
+# ; ln -s /opt/payara5 /opt/glassfish4
 
 # sudo -u postgres /usr/bin/initdb /var/lib/pgsql/data
 
@@ -78,7 +79,7 @@ sudo cp /tmp/dv/schema*.xml /opt/solr-8.11.1/server/solr/collection1/conf/
 sudo cp /tmp/dv/
 
 # keeping the symlink on the off chance that something else is still assuming /usr/local/glassfish4
-sudo ln -s /opt/payara5 /usr/local/glassfish4
+# sudo ln -s /opt/payara5 /usr/local/glassfish4
 sudo cp dv/install/ /opt/dv/
 sudo cp install.bash /opt/dv/
 sudo cp entrypoint.bash /opt/dv/
