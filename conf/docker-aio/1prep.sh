@@ -4,8 +4,8 @@
 # this was based off the phoenix deployment; and is likely uglier and bulkier than necessary in a perfect world
 
 sudo apt-get update                  # update the packages so `make` can be included
-sudo apt-get -y install make         # install `make` since it is not automatically included in the OS
-sudo apt-get -y install maven        # install `maven` since it is not automatically included in the OS
+sudo apt-get -qq -y install make         # install `make` since it is not automatically included in the OS
+sudo apt-get -qq -y install maven        # install `maven` since it is not automatically included in the OS
 
 # echo '------------------ start copy test data (/com.docker.devenvironments.code/conf/docker-aio/testdata)'                # testing
 # echo $(pwd)
@@ -67,7 +67,7 @@ sudo cp testdata/sushi_sample_logs.json /tmp/
 # sudo cp disableipv6.conf /etc/sysctl.d/
 # sudo cp httpd.conf /etc/httpd/conf 
 sudo tar -zxf /tmp/dv/deps/solr-8.11.1dv.tgz -C /opt
-sudo unzip /tmp/dv/deps/payara-5.2021.6.zip -d /opt
+sudo unzip -q /tmp/dv/deps/payara-5.2021.6.zip -d /opt
 # ; ln -s /opt/payara5 /opt/glassfish4
 
 # sudo -u postgres /usr/bin/initdb /var/lib/pgsql/data
