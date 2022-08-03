@@ -3,9 +3,9 @@
 # move things necessary for integration tests into build context.
 # this was based off the phoenix deployment; and is likely uglier and bulkier than necessary in a perfect world
 
-# sudo apt-get update                  # update the packages so `make` can be included
-# sudo apt-get -y install make         # install `make` since it is not automatically included in the OS
-# sudo apt-get -y install maven        # install `maven` since it is not automatically included in the OS
+sudo apt-get update                  # update the packages so `make` can be included
+sudo apt-get -y install make         # install `make` since it is not automatically included in the OS
+sudo apt-get -y install maven        # install `maven` since it is not automatically included in the OS
 
 # echo '------------------ start copy test data (/com.docker.devenvironments.code/conf/docker-aio/testdata)'                # testing
 # echo $(pwd)
@@ -56,7 +56,7 @@ echo "----------------> trying to move copy commands from Docker"
 
 # moving copy commands from the Docker file since the copy commands are not succeeding in the Docker file
 # copy and unpack dependencies (solr, payara)
-sudo cp -r dv /tmp/dv
+sudo cp -r dv /tmp
 sudo cp testdata/schema*.xml /tmp/dv/
 sudo cp testdata/solrconfig.xml /tmp/dv
 
