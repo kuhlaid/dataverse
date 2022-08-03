@@ -10,12 +10,13 @@
 
 echo '------------------ start copy test data'                # testing
 mkdir -p testdata/doc/sphinx-guides/source/_static/util/
-cp ../solr/8.8.1/schema*.xml testdata/
-cp ../solr/8.8.1/solrconfig.xml testdata/
-cp ../solr/8.8.1/updateSchemaMDB.sh testdata/
-cp ../jhove/jhove.conf testdata/
-cp ../jhove/jhoveConfig.xsd testdata/
-cd ../../
+cd ../
+cp solr/8.8.1/schema*.xml testdata/
+cp solr/8.8.1/solrconfig.xml testdata/
+cp solr/8.8.1/updateSchemaMDB.sh testdata/
+cp jhove/jhove.conf testdata/
+cp jhove/jhoveConfig.xsd testdata/
+cd ../
 cp -r scripts conf/docker-aio/testdata/
 cp doc/sphinx-guides/source/_static/util/createsequence.sql conf/docker-aio/testdata/doc/sphinx-guides/source/_static/util/
 echo '------------------ end copy test data'                # testing
