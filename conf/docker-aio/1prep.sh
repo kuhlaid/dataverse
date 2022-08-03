@@ -11,9 +11,9 @@
 echo '------------------ start copy test data'                # testing
 mkdir -p testdata/doc/sphinx-guides/source/_static/util/
 cd ../
-cp solr/8.8.1/schema*.xml testdata/
-cp solr/8.8.1/solrconfig.xml testdata/
-cp solr/8.8.1/updateSchemaMDB.sh testdata/
+echo $(pwd)
+cp /conf/solr/8.8.1/schema*.xml testdata/
+cp /conf/solr/8.8.1/solrconfig.xml testdata/
 cp jhove/jhove.conf testdata/
 cp jhove/jhoveConfig.xsd testdata/
 cd ../
