@@ -57,7 +57,7 @@ echo "----------------> trying to move copy commands from Docker"
 # moving copy commands from the Docker file since the copy commands are not succeeding in the Docker file
 # copy and unpack dependencies (solr, payara)
 sudo cp -r dv /tmp
-sudo cp testdata/schema*.xml /tmp/dv/
+sudo cp testdata/schema.xml /tmp/dv
 sudo cp testdata/solrconfig.xml /tmp/dv
 
 # ITs need files
@@ -75,8 +75,8 @@ cd /opt ; unzip /tmp/dv/deps/payara-5.2020.6.zip
 # copy configuration related files
 sudo cp /tmp/dv/pg_hba.conf /var/lib/pgsql/data/
 sudo cp -r /opt/solr-8.11.1/server/solr/configsets/_default /opt/solr-8.11.1/server/solr/collection1
-sudo cp /tmp/dv/schema*.xml /opt/solr-8.11.1/server/solr/collection1/conf/
-sudo cp /tmp/dv/
+sudo cp /tmp/dv/schema.xml /opt/solr-8.11.1/server/solr/collection1/conf/
+sudo cp /tmp/dv/solrconfig.xml /opt/solr-8.11.1/server/solr/collection1/conf/solrconfig.xml
 
 # keeping the symlink on the off chance that something else is still assuming /usr/local/glassfish4
 # sudo ln -s /opt/payara5 /usr/local/glassfish4
