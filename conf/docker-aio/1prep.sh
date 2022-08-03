@@ -50,7 +50,7 @@ make
 cd ../../
 cp src/test/java/edu/harvard/iq/dataverse/makedatacount/sushi_sample_logs.json conf/docker-aio/testdata/
 
-
+cd conf/docker-aio
 echo $(pwd)
 echo "----------------> trying to move copy commands from Docker"
 
