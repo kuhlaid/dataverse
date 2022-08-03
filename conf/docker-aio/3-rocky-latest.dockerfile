@@ -49,7 +49,7 @@ EXPOSE 80
 EXPOSE 8686
 EXPOSE 9009
 
-# RUN mkdir /opt/dv
+RUN cd /opt
 
 # keeping the symlink on the off chance that something else is still assuming /usr/local/glassfish4
 # RUN ln -s /opt/payara5 /usr/local/glassfish4
