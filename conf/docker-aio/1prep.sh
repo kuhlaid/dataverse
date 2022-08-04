@@ -7,6 +7,14 @@ sudo apt-get update                  # update the packages so `make` can be incl
 sudo apt-get -qq -y install make         # install `make` since it is not automatically included in the OS
 sudo apt-get -qq -y install maven        # install `maven` since it is not automatically included in the OS
 
+# install Postgresql
+# sudo apt-get install -y https://download.postgresql.org/pub/repos/yum/reporpms/EL-9-x86_64/pgdg-redhat-repo-latest.noarch.rpm
+# sudo dnf -qy module disable postgresql
+# sudo dnf install -y postgresql13-server
+# sudo /usr/pgsql-13/bin/postgresql-13-setup initdb
+# sudo systemctl enable postgresql-13
+# sudo systemctl start postgresql-13
+
 # echo '------------------ start copy test data (/com.docker.devenvironments.code/conf/docker-aio/testdata)'                # testing
 # echo $(pwd)
 mkdir -p testdata/doc/sphinx-guides/source/_static/util/
