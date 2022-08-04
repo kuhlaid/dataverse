@@ -1,24 +1,23 @@
-FROM centos:8
+FROM rockylinux/rockylinux:latest
 # OS dependencies
-# PG 10 is the default in centos8; keep the repo comment for when we bump to 11+
-#RUN yum install -y https://download.postgresql.org/pub/repos/yum/reporpms/EL-8-x86_64/pgdg-redhat-repo-latest.noarch.rpm
 RUN yum install -y java-11-openjdk-devel postgresql-server sudo epel-release unzip curl httpd
 RUN yum install -y jq lsof awscli
 
 # copy and unpack dependencies (solr, payara)
-COPY dv /tmp/dv
-COPY testdata/schema*.xml /tmp/dv/
-COPY testdata/solrconfig.xml /tmp/dv
+# RUN sudo cp dv /tmp/dv
+# RUN sudo cp testdata/schema*.xml /tmp/dv/
+# RUN sudo cp testdata/solrconfig.xml /tmp/dv
 
 # ITs need files
-COPY testdata/sushi_sample_logs.json /tmp/
+# RUN sudo cp testdata/sushi_sample_logs.json /tmp/
 
 # IPv6 and localhost appears to be related to some of the intermittant connection issues
-COPY disableipv6.conf /etc/sysctl.d/
+COPY  disableipv6.conf /etc/sysctl.d/
 RUN rm /etc/httpd/conf/*
 COPY httpd.conf /etc/httpd/conf 
-RUN cd /opt ; tar zxf /tmp/dv/deps/solr-8.8.1dv.tgz 
-RUN cd /opt ; unzip /tmp/dv/deps/payara-5.2020.6.zip ; ln -s /opt/payara5 /opt/glassfish4
+# RUN cd /opt ; tar zxf /tmp/dv/deps/solr-8.11.1dv.tgz 
+# RUN cd /opt ; unzip /tmp/dv/deps/payara-5.2020.6.zip ; 
+RUN ln -s /opt/payara5 /opt/glassfish4
 
 # this copy of domain.xml is the result of running `asadmin set server.monitoring-service.module-monitoring-levels.jvm=LOW` on a default glassfish installation (aka - enable the glassfish REST monitir endpoint for the jvm`
 # this dies under Java 11, do we keep it?
@@ -27,10 +26,10 @@ RUN cd /opt ; unzip /tmp/dv/deps/payara-5.2020.6.zip ; ln -s /opt/payara5 /opt/g
 RUN sudo -u postgres /usr/bin/initdb /var/lib/pgsql/data
 
 # copy configuration related files
-RUN cp /tmp/dv/pg_hba.conf /var/lib/pgsql/data/
-RUN cp -r /opt/solr-8.8.1/server/solr/configsets/_default /opt/solr-8.8.1/server/solr/collection1
-RUN cp /tmp/dv/schema*.xml /opt/solr-8.8.1/server/solr/collection1/conf/
-RUN cp /tmp/dv/solrconfig.xml /opt/solr-8.8.1/server/solr/collection1/conf/solrconfig.xml
+# RUN sudo cp /tmp/dv/pg_hba.conf /var/lib/pgsql/data/
+# RUN sudo cp -r /opt/solr-8.11.1/server/solr/configsets/_default /opt/solr-8.11.1/server/solr/collection1
+# RUN sudo cp /tmp/dv/schema*.xml /opt/solr-8.11.1/server/solr/collection1/conf/
+# RUN sudo cp /tmp/dv/solrconfig.xml /opt/solr-8.11.1/server/solr/collection1/conf/solrconfig.xml
 
 # skipping payara user and solr user (run both as root)
 
@@ -50,16 +49,16 @@ EXPOSE 80
 EXPOSE 8686
 EXPOSE 9009
 
-RUN mkdir /opt/dv
+RUN cd /opt
 
 # keeping the symlink on the off chance that something else is still assuming /usr/local/glassfish4
-RUN ln -s /opt/payara5 /usr/local/glassfish4
-COPY dv/install/ /opt/dv/
-COPY install.bash /opt/dv/
-COPY entrypoint.bash /opt/dv/
-COPY testdata/* /opt/dv/testdata
-COPY testscripts/* /opt/dv/testdata/
-COPY setupIT.bash /opt/dv
+# RUN ln -s /opt/payara5 /usr/local/glassfish4
+# RUN sudo cp dv/install/ /opt/dv/
+# RUN sudo cp install.bash /opt/dv/
+# RUN sudo cp entrypoint.bash /opt/dv/
+# RUN sudo cp testdata/* /opt/dv/testdata
+# RUN sudo cp testscripts/* /opt/dv/testdata/
+# RUN sudo cp setupIT.bash /opt/dv
 WORKDIR /opt/dv
 
 # need to take DOI provider info from build args as of ec377d2a4e27424db8815c55ce544deee48fc5e0
@@ -73,7 +72,7 @@ ENV DoiProvider=${DoiProvider}
 ENV doi_baseurl=${doi_baseurl}
 ENV doi_username=${doi_username}
 ENV doi_password=${doi_password}
-COPY configure_doi.bash /opt/dv
+# RUN sudo cp configure_doi.bash /opt/dv
 
 # healthcheck for payara only (assumes modified domain.xml);
 #  does not check dataverse application status.

@@ -2,6 +2,7 @@
 
 # do integration-test install and test data setup
 
+# the dv and testdata directories are initially stored under `/conf/docker-aio`
 cd /opt/dv
 unzip dvinstall.zip
 cd /opt/dv/testdata
