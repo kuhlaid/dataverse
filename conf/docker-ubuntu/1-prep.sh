@@ -34,8 +34,8 @@ cp ../solr/8.11.1/solrconfig.xml testdata/
 cp ../jhove/jhove.conf testdata/
 cp ../jhove/jhoveConfig.xsd testdata/
 cd ../../
-cp -r scripts conf/docker-aio/testdata/
-cp doc/sphinx-guides/source/_static/util/createsequence.sql conf/docker-aio/testdata/doc/sphinx-guides/source/_static/util/
+cp -r scripts conf/docker-ubuntu/testdata/
+cp doc/sphinx-guides/source/_static/util/createsequence.sql conf/docker-ubuntu/testdata/doc/sphinx-guides/source/_static/util/
 
 # mkdir maven
 # mv apache-maven-3.8.6/* maven/
@@ -58,4 +58,4 @@ make
 # yes, these copies could be avoided by moving the build root here. but the build 
 #  context is already big enough that it seems worth avoiding.
 cd ../../
-cp src/test/java/edu/harvard/iq/dataverse/makedatacount/sushi_sample_logs.json conf/docker-aio/testdata/
+cp src/test/java/edu/harvard/iq/dataverse/makedatacount/sushi_sample_logs.json conf/docker-ubuntu/testdata/

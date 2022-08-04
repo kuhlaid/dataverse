@@ -7,10 +7,10 @@ Also usable for normal development and system evaluation; not intended for produ
  - java11 compiler, maven, make, wget, docker
 
 ### Quickstart:
- - in the root of the repository, run `./conf/docker-aio/prep_it.bash`
+ - in the root of the repository, run `./conf/docker-ubuntu/prep_it.bash`
  - if using DataCite test credentials, update the build args appropriately.
  - if all goes well, you should see the results of the `api/info/version` endpoint, including the deployed build (eg `{"status":"OK","data":{"version":"4.8.6","build":"develop-c3e9f40"}}`). If not, you may need to read the non-quickstart instructions.
- - run integration tests: `./conf/docker-aio/run-test-suite.sh`
+ - run integration tests: `./conf/docker-ubuntu/run-test-suite.sh`
 
 ----
 
@@ -18,7 +18,7 @@ Also usable for normal development and system evaluation; not intended for produ
 
 
 ### Initial setup (aka - do once):
-- `cd conf/docker-aio` and run `./0prep_deps.sh` to create Payara and Solr tarballs in `conf/docker-aio/dv/deps`.
+- `cd conf/docker-ubuntu` and run `./0prep_deps.sh` to create Payara and Solr tarballs in `conf/docker-ubuntu/dv/deps`.
 
 ### Per-build:
 
@@ -26,21 +26,21 @@ Also usable for normal development and system evaluation; not intended for produ
 
 #### Setup
 
-- `cd conf/docker-aio`, and run `./1prep.sh` to copy files for integration test data into docker build context; `1prep.sh` will also build the war file and installation zip file
+- `cd conf/docker-ubuntu`, and run `./1prep.sh` to copy files for integration test data into docker build context; `1prep.sh` will also build the war file and installation zip file
 - build the docker image: `docker build -t dv0 -f c8.dockerfile .`
 
 - Run image: `docker run -d -p 8083:8080 -p 8084:80 --name dv dv0` (aka - forward port 8083 locally to 8080 in the container for payara, and 8084 to 80 for apache); if you'd like to connect a java debugger to payara, use `docker run -d -p 8083:8080 -p 8084:80 -p 9010:9009 --name dv dv0`
 
 - Installation (integration test): `docker exec dv /opt/dv/setupIT.bash` 
-  (Note that it's possible to customize the installation by editing `conf/docker-aio/default.config` and running `docker exec dv /opt/dv/install.bash` but for the purposes of integration testing, the `setupIT.bash` script above works fine.)
+  (Note that it's possible to customize the installation by editing `conf/docker-ubuntu/default.config` and running `docker exec dv /opt/dv/install.bash` but for the purposes of integration testing, the `setupIT.bash` script above works fine.)
 
 - update `dataverse.siteUrl` (appears only necessary for `DatasetsIT.testPrivateUrl`): `docker exec dv /usr/local/glassfish4/bin/asadmin create-jvm-options "-Ddataverse.siteUrl=http\://localhost\:8084"` (or use the provided `seturl.bash`)
 
 #### Run integration tests: 
 
-First, cd back to the root of the repo where the `pom.xml` file is (`cd ../..` assuming you're still in the `conf/docker-aio` directory). Then run the test suite with script below:
+First, cd back to the root of the repo where the `pom.xml` file is (`cd ../..` assuming you're still in the `conf/docker-ubuntu` directory). Then run the test suite with script below:
 
-`conf/docker-aio/run-test-suite.sh`
+`conf/docker-ubuntu/run-test-suite.sh`
 
 There isn't any strict requirement on the local port (8083, 8084 in this doc), the name of the image (dv0) or container (dv), these can be changed as desired as long as they are consistent.
 

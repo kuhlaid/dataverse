@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# run through all the steps to setup docker-aio to run integration tests
+# run through all the steps to setup docker-ubuntu to run integration tests
 
 # hard-codes several assumptions: image is named dv0, container is named dv, port is 8084
 
@@ -47,8 +47,8 @@ fi
 
 echo $(pwd)
 cd ../..
-#echo "docker-aio ready to run integration tests ($i_retry)"
-echo "docker-aio ready to run integration tests"
+#echo "docker-ubuntu ready to run integration tests ($i_retry)"
+echo "docker-ubuntu ready to run integration tests"
 curl http://localhost:8084/api/info/version
 echo $?
 

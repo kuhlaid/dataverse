@@ -47,6 +47,13 @@ conf/docker-aio/dv/install/dvinstall.zip
 # or copy of test data
 conf/docker-aio/testdata/
 
+conf/docker-ubuntu/dv/deps/
+
+# no need to check aoi installer zip into vc
+conf/docker-ubuntu/dv/install/dvinstall.zip
+# or copy of test data
+conf/docker-ubuntu/testdata/
+
 # docker-aio creates maven/ which reports 86 new files. ignore this wd.
 maven/
 
