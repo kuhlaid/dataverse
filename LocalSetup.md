@@ -7,7 +7,7 @@ Once the container is loaded, navigate into the container and choose the Docker 
 `cd com.docker.devenvironments.code`
 
 From here we will follow the steps laided out in `https://github.com/IQSS/dataverse/tree/develop/conf/docker-ubuntu` under QuickStart
-`./conf/docker-ubuntu/0-prep_it.bash`
+`./conf/docker-ubuntu/prep_it.bash`
 
 
 

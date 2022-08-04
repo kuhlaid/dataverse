@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# run through all the steps to setup docker-ubuntu to run integration tests
+# run through all the steps to setup docker-ubuntu to run integration tests (test to see if permissions update on upload)
 
 # hard-codes several assumptions: image is named dv0, container is named dv, port is 8084
 
