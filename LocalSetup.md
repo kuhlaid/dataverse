@@ -1,6 +1,6 @@
 # Setup in Docker Desktop
 
-Trying to create a dev environment within Docker Desktop by trying to load from:  
+Trying to create a dev environment within Docker Desktop by trying to load from (NOTE: do not try to setup dev environment using local code directory because Docker will not pick up the laguage type Java):  
 `https://github.com/kuhlaid/dataverse.git`
 
 Once the container is loaded, navigate into the container and choose the Docker CLI for the container. Then enter:
