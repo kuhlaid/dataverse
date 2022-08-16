@@ -31,9 +31,10 @@ echo $(pwd)
 # source maven/maven.sh && mvn clean
 # ./scripts/installer/custom-build-number
 # source maven/maven.sh && mvn package
-mvn clean
-dnf -y update     # update again just in case
-mvn package
+# mvn clean
+# dnf -y update     # update again just in case
+rm -rf rm -rf ~/.m2/repository/org/apache/      # hopefully clears this issue (https://stackoverflow.com/questions/17223536/failed-to-execute-goal-org-apache-maven-pluginsmaven-compiler-plugin2-3-2comp)
+mvn clean compile
 cd scripts/installer
 make clean
 make
