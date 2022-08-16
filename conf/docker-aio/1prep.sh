@@ -2,6 +2,9 @@
 
 # move things necessary for integration tests into build context.
 # this was based off the phoenix deployment; and is likely uglier and bulkier than necessary in a perfect world
+apt-get update                  # update the packages so `make` can be included
+apt-get -qq -y install make         # install `make` since it is not automatically included in the OS
+apt-get -qq -y install maven 
 
 mkdir -p testdata/doc/sphinx-guides/source/_static/util/
 cp ../solr/8.11.1/schema*.xml testdata/
@@ -12,8 +15,8 @@ cd ../../
 cp -r scripts conf/docker-aio/testdata/
 cp doc/sphinx-guides/source/_static/util/createsequence.sql conf/docker-aio/testdata/doc/sphinx-guides/source/_static/util/
 
-wget https://downloads.apache.org/maven/maven-3/3.8.6/binaries/apache-maven-3.8.6-bin.tar.gz
-tar xfz apache-maven-3.8.6-bin.tar.gz
+# wget https://downloads.apache.org/maven/maven-3/3.8.6/binaries/apache-maven-3.8.6-bin.tar.gz
+# tar xfz apache-maven-3.8.6-bin.tar.gz
 mkdir maven
 mv apache-maven-3.8.6/* maven/
 echo "export JAVA_HOME=/usr/lib/jvm/jre-openjdk" > maven/maven.sh
