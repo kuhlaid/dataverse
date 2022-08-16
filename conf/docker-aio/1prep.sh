@@ -7,13 +7,15 @@ dnf -y install make         # install `make` since it is not automatically inclu
 dnf -y install maven 
 
 mkdir -p testdata/doc/sphinx-guides/source/_static/util/
-cp ../solr/8.11.1/schema*.xml testdata/
-cp ../solr/8.11.1/solrconfig.xml testdata/
-cp ../jhove/jhove.conf testdata/
-cp ../jhove/jhoveConfig.xsd testdata/
-cd ../../
-cp -r scripts conf/docker-aio/testdata/
+cd ../
+cp $(pwd)/solr/8.11.1/schema.xml docker-aio/testdata/
+cp $(pwd)/solr/8.11.1/solrconfig.xml docker-aio/testdata/
+cp $(pwd)/jhove/jhove.conf docker-aio/testdata/
+cp $(pwd)/jhove/jhoveConfig.xsd docker-aio/testdata/
+cd ../
+cp -r $(pwd)/scripts $(pwd)/conf/docker-aio/testdata/
 cp doc/sphinx-guides/source/_static/util/createsequence.sql conf/docker-aio/testdata/doc/sphinx-guides/source/_static/util/
+echo $(pwd)
 
 # wget https://downloads.apache.org/maven/maven-3/3.8.6/binaries/apache-maven-3.8.6-bin.tar.gz
 # tar xfz apache-maven-3.8.6-bin.tar.gz
@@ -29,6 +31,8 @@ cp doc/sphinx-guides/source/_static/util/createsequence.sql conf/docker-aio/test
 # source maven/maven.sh && mvn clean
 # ./scripts/installer/custom-build-number
 # source maven/maven.sh && mvn package
+mvn clean
+dnf -y update     # update again just in case
 mvn package
 cd scripts/installer
 make clean
