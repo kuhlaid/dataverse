@@ -5,7 +5,7 @@ fi
 wdir=`pwd`
 
 if [ ! -e dv/deps/payara-5.2021.6.zip ]; then
-	echo "payara dependency prep"
+	echo "payara dependency prep in the docker-build branch"
 	wget https://s3-eu-west-1.amazonaws.com/payara.fish/Payara+Downloads/5.2021.6/payara-5.2021.6.zip  -O dv/deps/payara-5.2021.6.zip
 fi
 
