@@ -2,9 +2,9 @@
 
 # move things necessary for integration tests into build context.
 # this was based off the phoenix deployment; and is likely uglier and bulkier than necessary in a perfect world
-apt-get update                  # update the packages so `make` can be included
-apt-get -qq -y install make         # install `make` since it is not automatically included in the OS
-apt-get -qq -y install maven 
+dnf -y update                  # update the packages so `make` can be included
+dnf -y install make         # install `make` since it is not automatically included in the OS
+dnf -y install maven 
 
 mkdir -p testdata/doc/sphinx-guides/source/_static/util/
 cp ../solr/8.11.1/schema*.xml testdata/
@@ -17,18 +17,19 @@ cp doc/sphinx-guides/source/_static/util/createsequence.sql conf/docker-aio/test
 
 # wget https://downloads.apache.org/maven/maven-3/3.8.6/binaries/apache-maven-3.8.6-bin.tar.gz
 # tar xfz apache-maven-3.8.6-bin.tar.gz
-mkdir maven
-mv apache-maven-3.8.6/* maven/
-echo "export JAVA_HOME=/usr/lib/jvm/jre-openjdk" > maven/maven.sh
-echo "export M2_HOME=../maven" >> maven/maven.sh
-echo "export MAVEN_HOME=../maven" >> maven/maven.sh
-echo "export PATH=../maven/bin:${PATH}" >> maven/maven.sh
-chmod 0755 maven/maven.sh
+# mkdir maven
+# mv apache-maven-3.8.6/* maven/
+# echo "export JAVA_HOME=/usr/lib/jvm/jre-openjdk" > maven/maven.sh
+# echo "export M2_HOME=../maven" >> maven/maven.sh
+# echo "export MAVEN_HOME=../maven" >> maven/maven.sh
+# echo "export PATH=../maven/bin:${PATH}" >> maven/maven.sh
+# chmod 0755 maven/maven.sh
 
 # not using dvinstall.zip for setupIT.bash; but still used in install.bash for normal ops
-source maven/maven.sh && mvn clean
-./scripts/installer/custom-build-number
-source maven/maven.sh && mvn package
+# source maven/maven.sh && mvn clean
+# ./scripts/installer/custom-build-number
+# source maven/maven.sh && mvn package
+mvn package
 cd scripts/installer
 make clean
 make
