@@ -1,5 +1,18 @@
 # Docker All-In-One
 
+As of Aug. 16, 2022 these scripts are not working as expected. Currently the build fails with the Maven plugin error:
+
+```bash
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.8.1:compile (default-compile) on project dataverse: Compilation failure -> [Help 1]
+```
+
+The goal of this code is to 'standardize' the build process and get away from assumptions about environment used to run the Docker build process. Trying to run this build process from a Windows computer can be fruitless because if you try and clone the Dataverse code from GitHub, the scripts will be converted to Windows End of Line characters (which will cause the scripts in this folder to fail because they assume a Linux environment and Linux does not like Windows End of Line characters).
+
+## Using this Docker build process
+
+This build process assumes you only have Docker and Docker Desktop installed (although you could get by without using Docker Desktop). In order to 'standardize' the build process (especially for Windows users) we need to start with a Docker container to call the build process. We achieve this by first downloading the Dataverse code to a Docker container and using that container to kick off the process. The starter Dockerfile and setup can be found at [https://github.com/kuhlaid/dataverse-dockerfile](https://github.com/kuhlaid/dataverse-dockerfile).
+
+## Old documentation
 First pass docker all-in-one image, intended for running integration tests against.
 Also usable for normal development and system evaluation; not intended for production.
 
