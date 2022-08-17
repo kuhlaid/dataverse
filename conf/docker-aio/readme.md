@@ -1,5 +1,7 @@
 # Docker All-In-One
 
+> **This is not working at the moment**
+
 First pass docker all-in-one image, intended for running integration tests against.
 Also usable for normal development and system evaluation; not intended for production.
 
