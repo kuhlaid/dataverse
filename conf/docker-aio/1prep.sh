@@ -2,8 +2,10 @@
 
 # move things necessary for integration tests into build context.
 # this was based off the phoenix deployment; and is likely uglier and bulkier than necessary in a perfect world
-dnf -y update                  # update the packages so `make` can be included
-dnf -y install make         # install `make` since it is not automatically included in the OS
+dnf -y update                           # update the packages so `make` can be included
+dnf -y install make                     # install `make` since it is not automatically included in the OS 
+dnf -y install java-11-openjdk-devel    # install java
+
 # dnf -y install maven 
 
 mkdir -p testdata/doc/sphinx-guides/source/_static/util/
