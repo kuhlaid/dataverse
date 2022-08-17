@@ -21,11 +21,10 @@ wget https://downloads.apache.org/maven/maven-3/3.8.6/binaries/apache-maven-3.8.
 tar xfz apache-maven-3.8.6-bin.tar.gz
 mkdir maven
 mv apache-maven-3.8.6/* maven/
-export PATH=$(pwd)/maven/bin:$PATH
 echo "export JAVA_HOME=/usr/lib/jvm/jre-openjdk" > maven/maven.sh
-echo "export M2_HOME=../maven" >> maven/maven.sh
-echo "export MAVEN_HOME=../maven" >> maven/maven.sh
-echo "export PATH=../maven/bin:${PATH}" >> maven/maven.sh
+echo "export M2_HOME=$(pwd)/maven" >> maven/maven.sh
+echo "export MAVEN_HOME=$(pwd)/maven" >> maven/maven.sh
+echo "export PATH=$(pwd)/maven/bin:${PATH}" >> maven/maven.sh
 chmod 0755 maven/maven.sh
 
 # not using dvinstall.zip for setupIT.bash; but still used in install.bash for normal ops
