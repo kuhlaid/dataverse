@@ -4,7 +4,7 @@
 # this was based off the phoenix deployment; and is likely uglier and bulkier than necessary in a perfect world
 dnf -y update                  # update the packages so `make` can be included
 dnf -y install make         # install `make` since it is not automatically included in the OS
-dnf -y install maven 
+# dnf -y install maven 
 
 mkdir -p testdata/doc/sphinx-guides/source/_static/util/
 cd ../
@@ -21,6 +21,7 @@ wget https://downloads.apache.org/maven/maven-3/3.8.6/binaries/apache-maven-3.8.
 tar xfz apache-maven-3.8.6-bin.tar.gz
 mkdir maven
 mv apache-maven-3.8.6/* maven/
+export PATH=$(pwd)/maven/bin:$PATH
 echo "export JAVA_HOME=/usr/lib/jvm/jre-openjdk" > maven/maven.sh
 echo "export M2_HOME=../maven" >> maven/maven.sh
 echo "export MAVEN_HOME=../maven" >> maven/maven.sh
