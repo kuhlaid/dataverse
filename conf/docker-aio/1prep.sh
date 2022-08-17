@@ -34,7 +34,7 @@ echo $(pwd)
 # mvn clean
 # dnf -y update     # update again just in case
 # rm -rf rm -rf ~/.m2/repository/org/apache/      # does not seem to do any good (https://stackoverflow.com/questions/17223536/failed-to-execute-goal-org-apache-maven-pluginsmaven-compiler-plugin2-3-2comp)
-mvn compile
+mvn package
 echo "================= finished Maven compile"     # testing
 cd scripts/installer
 make clean
