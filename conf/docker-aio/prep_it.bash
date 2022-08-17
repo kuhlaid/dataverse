@@ -9,7 +9,9 @@ n_wait=5
 
 cd conf/docker-aio
 ./0prep_deps.sh
+echo "prep_it.bash finished running 0prep_deps.sh"	# testing
 ./1prep.sh
+echo "prep_it.bash finished running 1prep.sh"		# testing
 docker build -t dv0 -f c8.dockerfile .
 # cleanup from previous runs if necessary
 docker rm -f dv
