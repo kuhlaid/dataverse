@@ -665,6 +665,8 @@
 		<version>3.8.1</version>
 		<configuration>
 		    <release>14</release>
+		    <source>1.8</source>
+          	    <target>1.8</target>
 		    <!-- for use with `mvn -DcompilerArgument=-Xlint:unchecked compile` -->
                     <compilerArgument>${compilerArgument}</compilerArgument>
 		    <forceJavacCompilerUse>true</forceJavacCompilerUse>
