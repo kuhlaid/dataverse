@@ -5,6 +5,7 @@
 dnf -y update                           # update the packages so `make` can be included
 dnf -y install make                     # install `make` since it is not automatically included in the OS 
 dnf -y install java-11-openjdk-devel    # install java
+dnf -y install zip                      # install zip
 
 # dnf -y install maven 
 
