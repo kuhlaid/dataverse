@@ -33,11 +33,13 @@ echo $(pwd)
 # source maven/maven.sh && mvn package
 # mvn clean
 # dnf -y update     # update again just in case
-rm -rf rm -rf ~/.m2/repository/org/apache/      # hopefully clears this issue (https://stackoverflow.com/questions/17223536/failed-to-execute-goal-org-apache-maven-pluginsmaven-compiler-plugin2-3-2comp)
+# rm -rf rm -rf ~/.m2/repository/org/apache/      # does not seem to do any good (https://stackoverflow.com/questions/17223536/failed-to-execute-goal-org-apache-maven-pluginsmaven-compiler-plugin2-3-2comp)
 mvn compile
+echo "================= finished Maven compile"     # testing
 cd scripts/installer
 make clean
 make
+echo "================= finished Make"     # testing
 mkdir -p ../../conf/docker-aio/dv/install
 cp dvinstall.zip ../../conf/docker-aio/dv/install/
 
