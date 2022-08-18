@@ -1,6 +1,7 @@
 #!/bin/bash
 
-apt-get update && apt-get install -y default-jre make zip
+# adding nano just to have a text editor for testing
+apt-get update && apt-get install -y default-jre make nano zip
 
 mkdir -p testdata/doc/sphinx-guides/source/_static/util/
 cd ../
