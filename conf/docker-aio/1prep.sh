@@ -1,7 +1,24 @@
 #!/bin/bash
 
+# we need to install Docker first
+apt-get update
+apt-get install \
+    ca-certificates \
+    curl \
+    gnupg \
+    lsb-release
+
+mkdir -p /etc/apt/keyrings
+curl -fsSL https://download.docker.com/linux/debian/gpg | gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+echo \
+  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/debian \
+  $(lsb_release -cs) stable" | tee /etc/apt/sources.list.d/docker.list > /dev/null
+
+# apt-get update
+# apt-get -y install docker-ce docker-ce-cli containerd.io docker-compose-plugin
+
 # adding nano just to have a text editor for testing
-apt-get update && apt-get install -y default-jre docker make nano zip
+apt-get update && apt-get install -y default-jre make nano zip docker-ce docker-ce-cli containerd.io docker-compose-plugin
 
 mkdir -p testdata/doc/sphinx-guides/source/_static/util/
 cd ../
