@@ -1,9 +1,6 @@
 #!/bin/bash
 
-apt-get update && apt-get install -y \
-    java-11-openjdk-devel \
-    make \
-    zip
+apt-get update && apt-get install -y default-jre make zip
 
 mkdir -p testdata/doc/sphinx-guides/source/_static/util/
 cd ../
