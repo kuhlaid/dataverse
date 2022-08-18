@@ -2,7 +2,7 @@
 
 # we need to install Docker first
 apt-get update
-apt-get install \
+apt-get -y install \
     ca-certificates \
     curl \
     gnupg \
