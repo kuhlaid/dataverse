@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # adding nano just to have a text editor for testing
-apt-get update && apt-get install -y default-jre make nano zip
+apt-get update && apt-get install -y default-jre docker make nano zip
 
 mkdir -p testdata/doc/sphinx-guides/source/_static/util/
 cd ../
@@ -18,7 +18,8 @@ wget https://downloads.apache.org/maven/maven-3/3.8.6/binaries/apache-maven-3.8.
 tar xfz apache-maven-3.8.6-bin.tar.gz
 mkdir maven
 mv apache-maven-3.8.6/* maven/
-echo "export JAVA_HOME=/usr/lib/jvm/jre-openjdk" > maven/maven.sh
+# this should automatically read the jvm directory to set JAVA_HOME (which is somewhere like: /usr/lib/jvm/java-11-openjdk-amd64)
+echo "export JAVA_HOME=$(readlink -f /usr/bin/java | sed "s:/bin/java::")" > maven/maven.sh
 echo "export M2_HOME=$(pwd)/maven" >> maven/maven.sh
 echo "export MAVEN_HOME=$(pwd)/maven" >> maven/maven.sh
 echo "export PATH=$(pwd)/maven/bin:${PATH}" >> maven/maven.sh
