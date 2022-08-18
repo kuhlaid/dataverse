@@ -1,11 +1,9 @@
 #!/bin/bash
 
-# move things necessary for integration tests into build context.
-# this was based off the phoenix deployment; and is likely uglier and bulkier than necessary in a perfect world
-sudo apt -y update                           # update the packages so `make` can be included
-sudo apt -y install make                     # install `make` since it is not automatically included in the OS 
-sudo apt -y install java-11-openjdk-devel    # install java
-sudo apt -y install zip                      # install zip
+apt-get update && apt-get install -y \
+    java-11-openjdk-devel \
+    make \
+    zip
 
 mkdir -p testdata/doc/sphinx-guides/source/_static/util/
 cd ../
