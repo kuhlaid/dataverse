@@ -1,5 +1,5 @@
 # pull from https://hub.docker.com/_/debian/
-FROM debian:sid-20220801
+FROM debian:stable
 # OS dependencies
 # IQSS now recommends Postgres 13.
 RUN dnf -qy module disable postgresql
