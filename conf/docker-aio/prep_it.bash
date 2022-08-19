@@ -12,7 +12,7 @@ cd conf/docker-aio
 echo "prep_it.bash finished running 0prep_deps.sh"	# testing
 ./1prep.sh
 echo "prep_it.bash finished running 1prep.sh"		# testing
-docker build -t dv0 -f c8.dockerfile .
+docker build -t dv0 -f debian.dockerfile .
 # cleanup from previous runs if necessary
 docker rm -f dv
 # start container
