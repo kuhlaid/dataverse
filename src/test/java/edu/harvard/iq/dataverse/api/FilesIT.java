@@ -2370,17 +2370,17 @@ public class FilesIT {
      */
     @Test
     public void test_10148_ZipFileReplace() throws InterruptedException {
-        String strFileName = "11.zip"
-        String strFileOrigPath = "src/test/resources/zip/"
-        String strFileReplacePath = "11.zip.replacement/"
+        String strFileName = "11.zip";
+        String strFileOrigPath = "src/test/resources/zip/";
+        String strFileReplacePath = "11.zip.replacement/";
         String successMsg2 = BundleUtil.getStringFromBundle("file.addreplace.success.replace");
         String apiToken = createUserGetToken();                                 // Create user
         String dataverseAlias = createDataverseGetAlias(apiToken);              // Create Dataverse
         Integer datasetId = createDatasetGetId(dataverseAlias, apiToken);       // Create Dataset
         String pathToInitFile = strFileOrigPath.concat(strFileName);                // Original zip file
-        String strReplaceDesc = "replacement zip"
-        String strReplaceCat = "Data"
-        String strReplaceFileTag = "Survey"
+        String strReplaceDesc = "replacement zip";
+        String strReplaceCat = "Data";
+        String strReplaceFileTag = "Survey";
         msg("test_10148_ZipFileReplace - Add initial file");                                                // Add initial file
         Response addResponse = UtilIT.uploadFileViaNative(datasetId.toString(), pathToInitFile, apiToken);      // Add zip file to the dataset
         addResponse.prettyPrint();
