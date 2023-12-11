@@ -2394,7 +2394,7 @@ public class FilesIT {
         Response publishDataversetResp = UtilIT.publishDataverseViaSword(dataverseAlias, apiToken);
         publishDataversetResp.then().assertThat()
                 .statusCode(OK.getStatusCode());
-        assertTrue(UtilIT.sleepForLock(datasetId.longValue(), "Ingest", apiToken, UtilIT.MAXIMUM_INGEST_LOCK_DURATION), "Failed test if Ingest Lock exceeds max duration " + pathToFile);       // give file time to ingest
+        assertTrue(UtilIT.sleepForLock(datasetId.longValue(), "Ingest", apiToken, UtilIT.MAXIMUM_INGEST_LOCK_DURATION), "Failed test if Ingest Lock exceeds max duration " + strFileOrigPath);       // give file time to ingest
         Response ddi = UtilIT.getFileMetadata(origFileId.toString(), "ddi", apiToken);          // get information on our originally uploaded zip file
         ddi.then().assertThat()
                 .statusCode(OK.getStatusCode())
