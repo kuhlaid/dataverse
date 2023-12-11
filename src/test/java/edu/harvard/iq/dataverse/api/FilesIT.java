@@ -2362,4 +2362,65 @@ public class FilesIT {
         fileHasBeenDeleted = JsonPath.from(getHasBeenDeletedResponse.body().asString()).getBoolean("data");
         assertTrue(fileHasBeenDeleted);
     }
+
+
+    /**
+     * @abstract - Testing that the replacement of an existing zip file named 11.zip with a new 11.zip with different file contents to ensure that a duplicate file is not created and the replacement file is named 11.zip as expected.
+     * 2023.12.11 
+     */
+    @Test
+    public void test_10148_ZipFileReplace() throws InterruptedException {
+        String strFileName = "11.zip"
+        String strFileOrigPath = "src/test/resources/zip/"
+        String strFileReplacePath = "11.zip.replacement/"
+        String successMsg2 = BundleUtil.getStringFromBundle("file.addreplace.success.replace");
+        String apiToken = createUserGetToken();                                 // Create user
+        String dataverseAlias = createDataverseGetAlias(apiToken);              // Create Dataverse
+        Integer datasetId = createDatasetGetId(dataverseAlias, apiToken);       // Create Dataset
+        String pathToInitFile = strFileOrigPath.concat(strFileName);                // Original zip file
+        String strReplaceDesc = "replacement zip"
+        String strReplaceCat = "Data"
+        String strReplaceFileTag = "Survey"
+        msg("test_10148_ZipFileReplace - Add initial file");                                                // Add initial file
+        Response addResponse = UtilIT.uploadFileViaNative(datasetId.toString(), pathToInitFile, apiToken);      // Add zip file to the dataset
+        addResponse.prettyPrint();
+        addResponse.then().assertThat()
+                .body("data.files[0].label", equalTo(strFileName))
+                .statusCode(OK.getStatusCode());
+        Long origFileId = JsonPath.from(addResponse.body().asString()).getLong("data.files[0].dataFile.id");
+        msg("Orig file id: " + origFileId);
+        assertNotNull(origFileId);    // If checkOut fails, display message
+        msg("Publish dataverse and dataset");
+        Response publishDataversetResp = UtilIT.publishDataverseViaSword(dataverseAlias, apiToken);
+        publishDataversetResp.then().assertThat()
+                .statusCode(OK.getStatusCode());
+        assertTrue(UtilIT.sleepForLock(datasetId.longValue(), "Ingest", apiToken, UtilIT.MAXIMUM_INGEST_LOCK_DURATION), "Failed test if Ingest Lock exceeds max duration " + pathToFile);       // give file time to ingest
+        Response ddi = UtilIT.getFileMetadata(origFileId.toString(), "ddi", apiToken);          // get information on our originally uploaded zip file
+        ddi.then().assertThat()
+                .statusCode(OK.getStatusCode())
+                .body("codeBook.fileDscr.fileTxt.fileName", equalTo(strFileName));
+        
+        Response publishDatasetResp = UtilIT.publishDatasetViaNativeApi(datasetId, "major", apiToken);
+        publishDatasetResp.prettyPrint();
+        publishDatasetResp.then().assertThat()
+                .statusCode(OK.getStatusCode());
+        msg("Replace file - 1st time");
+        JsonObjectBuilder json = Json.createObjectBuilder()
+                .add("forceReplace", true)
+                .add("description", strReplaceDesc)
+                .add("categories", Json.createArrayBuilder()
+                        .add(strReplaceCat)
+                )
+                .add("dataFileTags", Json.createArrayBuilder()
+                        .add(strReplaceFileTag)
+                );
+        Response replaceResp = UtilIT.replaceFile(origFileId.toString(), strFileOrigPath.concat(strFileReplacePath).concat(strFileName), json.build(), apiToken);
+        msgt(replaceResp.prettyPrint());        // check the response from the file replacement
+        replaceResp.then().assertThat()
+                .body("message", equalTo(successMsg2))
+                .body("data.files[0].label", equalTo(strFileName))
+                .body("data.files[0].description", equalTo(strReplaceDesc))
+                .body("data.files[0].categories[0]", equalTo(strReplaceCat))
+                .statusCode(OK.getStatusCode());
+    }
 }
